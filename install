@@ -1,0 +1,19 @@
+#!/bin/bash
+
+absolute-path() {
+  (cd "$1" && pwd)
+}
+
+relative-path() {
+  local targetDir="$(absolute-path "$1")"
+  local pivotDir="$(absolute-path "$2")"
+  echo "${targetDir#$pivotDir/}"
+}
+
+relativeDir="$(relative-path "$(dirname "$0")" "$HOME")"
+
+# install advanced file search tools
+brew install fd fzf
+
+test -d ~/.config/nvim || \
+  ln -s ../$relativeDir/nvim ~/.config/nvim
