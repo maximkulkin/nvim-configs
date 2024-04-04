@@ -5,7 +5,7 @@ require('nvim-tree').setup {
   hijack_unnamed_buffer_when_opening = false,
   sync_root_with_cwd = true,
   update_focused_file = {
-    enable = true,
+    enable = false,
     update_root = false,
   },
   view = {
