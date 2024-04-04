@@ -49,8 +49,8 @@ vim.api.nvim_create_autocmd("QuitPre", {
     local invalid_win = {}
     local wins = vim.api.nvim_list_wins()
     for _, w in ipairs(wins) do
-      local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
-      if bufname:match("NvimTree_") ~= nil then
+      local bufnr = vim.api.nvim_win_get_buf(w)
+      if vim.fn.buflisted(bufnr) == 0 then
         table.insert(invalid_win, w)
       end
     end
