@@ -9,11 +9,26 @@ require('telescope').setup({
       },
     }
   },
+  pickers = {
+    buffers = {
+      sort_mru = true,
+      mappings = {
+        i = {
+          ['<c-x>'] = 'delete_buffer',
+        },
+        n = {
+          d = 'delete_buffer',
+          ['<c-x>'] = 'delete_buffer',
+        },
+      }
+    },
+  },
 })
 
 local builtin = require('telescope.builtin')
+
 vim.keymap.set('n', '<leader>ff', builtin.find_files)
-vim.keymap.set('n', '<leader>fb', function() builtin.buffers({sort_mru = true }) end)
+vim.keymap.set('n', '<leader>fb', builtin.buffers)
 vim.keymap.set('n', '<leader>fg', builtin.live_grep)
 vim.keymap.set('n', '<leader>fw', builtin.grep_string)
 vim.keymap.set('n', '<leader>fq', builtin.quickfix)
