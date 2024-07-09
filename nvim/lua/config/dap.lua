@@ -1,4 +1,4 @@
-local dap = require('dap')
+local dap, dapui = require('dap'), require('dapui')
 local mason_registry = require('mason-registry')
 
 dap.adapters.python = {
@@ -66,6 +66,20 @@ dap.configurations.python = {
     program = '${file}',
   },
 }
+
+dapui.setup()
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end
 
 vim.keymap.set('n', '<leader>dc', dap.continue)
 vim.keymap.set('n', '<leader>dn', dap.step_over)
