@@ -82,11 +82,15 @@ dap.listeners.before.event_exited.dapui_config = function()
 end
 
 vim.keymap.set('n', '<leader>dc', dap.continue)
-vim.keymap.set('n', '<leader>dn', dap.step_over)
-vim.keymap.set('n', '<leader>ds', dap.step_into)
+vim.keymap.set('n', '<C-S-j>', dap.step_over)
+vim.keymap.set('n', '<C-S-l>', dap.step_into)
+vim.keymap.set('n', '<C-S-k>', dap.step_out)
 vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
 vim.keymap.set('n', '<leader>dB', dap.set_breakpoint)
+vim.keymap.set('n', '<leader>dr', dap.restart)
 vim.keymap.set('n', '<leader>dl', dap.run_last)
+vim.keymap.set('n', '<leader>dt', dap.terminate)
+vim.keymap.set('n', '<leader>dR', dap.repl.toggle)
 vim.keymap.set({'n', 'v'}, '<leader>dp', function()
   require('dap.ui.widgets').preview()
 end)
@@ -98,13 +102,16 @@ end)
 require('which-key').register({
   ['<leader>d'] = {
     c = 'Debug continue',
-    s = 'Debug step into',
-    n = 'Debug step over',
     b = 'Debug toggle breakpoint',
     B = 'Debug set breakpoint',
-    r = 'Debug run',
+    r = 'Debug restart',
     l = 'Debug run last',
+    t = 'Debug terminate',
+    R = 'Debug REPL toggle',
     p = 'Debug preview value',
     f = 'Debug show frames',
   },
+  ['<C-S-j>'] = 'Debug step over',
+  ['<C-S-l>'] = 'Debug step into',
+  ['<C-S-k>'] = 'Debug step out',
 })
