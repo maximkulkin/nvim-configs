@@ -1,9 +1,70 @@
 local dap = require('dap')
+local mason_registry = require('mason-registry')
 
 dap.adapters.python = {
   type = 'executable';
   command = '/opt/homebrew/bin/python3';
   args = { '-m', 'debugpy.adapter' };
+}
+
+
+dap.adapters.codelldb = function(on_config, _, _)
+  local codelldb_root = mason_registry.get_package('codelldb'):get_install_path()
+  local codelldb_path = codelldb_root .. '/codelldb'
+  local liblldb_path = codelldb_root .. '/extension/lldb/lib/liblldb.dylib'
+  local config = {
+    type = 'server',
+    port = '${port}',
+    host = '127.0.0.1',
+    executable = {
+      command = codelldb_path,
+      args = { '--liblldb', liblldb_path, '--port', '${port}' },
+      -- args = { '--port', '${port}' },
+    },
+  }
+  vim.print('config = ', config)
+  on_config(config)
+end
+
+dap.configurations.c = {
+  {
+    name = 'run',
+    type = 'codelldb',
+    request = 'launch',
+    program = function()
+      local path = vim.fn.input({
+        prompt = 'Path to executable: ',
+        default = vim.fn.getcwd() .. '/',
+        completion = 'file',
+      })
+      return (path and path ~= '') and path or dap.ABORT
+    end,
+  },
+}
+
+dap.configurations.cpp = {
+  {
+    name = 'run',
+    type = 'codelldb',
+    request = 'launch',
+    program = function()
+      local path = vim.fn.input({
+        prompt = 'Path to executable: ',
+        default = vim.fn.getcwd() .. '/',
+        completion = 'file',
+      })
+      return (path and path ~= '') and path or dap.ABORT
+    end,
+  },
+}
+
+dap.configurations.python = {
+  {
+    type = 'python',
+    request = 'launch',
+    name = 'Launch file',
+    program = '${file}',
+  },
 }
 
 vim.keymap.set('n', '<leader>dc', dap.continue)
