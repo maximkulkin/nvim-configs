@@ -151,6 +151,19 @@ require('packer').startup(function(use)
       require('config.persistence')
     end,
   }
+  use { "klen/nvim-config-local",
+    config = function()
+      require('config-local').setup({
+        config_files = { '.nvim.lua' },
+        hashfile = vim.fn.stdpath("data") .. "/config-local",
+
+        autocommands_create = true,
+        commands_create = true,
+        silent = false,
+        lookup_parents = true,
+      })
+    end,
+  }
 
   use { 'lewis6991/gitsigns.nvim',
     config = function()
