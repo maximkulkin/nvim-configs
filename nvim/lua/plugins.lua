@@ -195,6 +195,9 @@ require('packer').startup(function(use)
     end,
   }
 
+  -- use 'bfredl/nvim-luadev'
+  use 'ii14/neorepl.nvim'
+
   use { "ariel-frischer/bmessages.nvim",
     config = function()
       require("bmessages").setup({})
