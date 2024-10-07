@@ -64,6 +64,10 @@ require('which-key').register({
   [']d'] = 'Next diagnostic',
 })
 
+local lua_runtime_paths = {}
+for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
+  lua_runtime_paths[path] = true
+end
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
@@ -75,10 +79,7 @@ lspconfig.lua_ls.setup {
         globals = { 'vim' },
       },
       workspace = {
-        library = {
-          [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-          [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-        },
+        library = lua_runtime_paths,
         maxPreload = 100000,
         preloadFileSize = 10000,
       },
