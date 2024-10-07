@@ -255,6 +255,11 @@ require('packer').startup(function(use)
     end,
   }
 
+  use {"Civitasv/cmake-tools.nvim",
+    config = function()
+      require("config.cmake_tools")
+    end,
+  }
 end)
 
 if packer_bootstrap then
