@@ -26,8 +26,5 @@ require('mason').setup {
   },
   max_concurrent_installers = 10,
 }
-vim.api.nvim_create_user_command('MasonInstallAll', function()
-  vim.cmd('MasonInstall ' .. table.concat(servers, ' '))
-end, {})
 
-vim.g.mason_binaries_list = servers
+-- vim.g.mason_binaries_list = servers
