@@ -14,9 +14,11 @@ require('leetcode').setup {
     },
   },
   hooks = {
-    LeetEnter = {
+    enter = {
       function()
-        vim.cmd([[NvimTreeClose]])
+        vim.schedule(function()
+          vim.cmd([[ NvimTreeClose ]])
+        end)
 
         vim.keymap.set('n', '<leader>lm', ':Leet menu<CR>')
         vim.keymap.set('n', '<leader>ll', ':Leet list<CR>')
@@ -24,6 +26,7 @@ require('leetcode').setup {
         vim.keymap.set('n', '<leader>lc', ':Leet console<CR>')
         vim.keymap.set('n', '<leader>lr', ':Leet run<CR>')
         vim.keymap.set('n', '<leader>ls', ':Leet submit<CR>')
+
         require('which-key').register({
           ['<leader>l'] = {
             name = 'Leetcoode',
