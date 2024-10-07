@@ -195,6 +195,12 @@ require('packer').startup(function(use)
     end,
   }
 
+  use { "ariel-frischer/bmessages.nvim",
+    config = function()
+      require("bmessages").setup({})
+    end,
+  }
+
   use { 'stevearc/overseer.nvim',
     config = function()
       require('config.overseer')
