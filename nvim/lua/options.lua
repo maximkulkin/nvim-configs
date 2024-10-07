@@ -42,6 +42,8 @@ vim.opt.mouse = 'a'
 
 vim.opt.cinoptions = 'l1'
 
+vim.o.exrc = true
+
 -- aliases for commonly mistyped commands
 vim.cmd([[command! Q q]])
 vim.cmd([[command! W w]])
