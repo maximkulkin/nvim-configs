@@ -84,7 +84,11 @@ require('packer').startup(function(use)
     config = 'require("config.bufferline")',
   }
 
-  use 'rcarriga/nvim-notify'
+  use { 'rcarriga/nvim-notify',
+    config = function()
+      require('config.notify')
+    end,
+  }
 
   use { 'nvim-treesitter/nvim-treesitter',
     config = function()
