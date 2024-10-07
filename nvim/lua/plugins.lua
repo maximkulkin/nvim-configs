@@ -32,6 +32,9 @@ require('packer').startup(function(use)
 
   use 'nvim-lua/plenary.nvim'
   use { 'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-telescope/telescope-ui-select.nvim',
+    },
     config = function()
       require('config.telescope')
     end,
