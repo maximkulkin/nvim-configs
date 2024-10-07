@@ -216,6 +216,7 @@ require('packer').startup(function(use)
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-python",
+      "nvim-neotest/nvim-nio",
     },
     config = function()
       require('config.neotest')
