@@ -3,3 +3,5 @@ vim.keymap.set('n', '<C-e>', ':b# <CR>')
 vim.keymap.set('n', 'E', ':e <C-R>=expand("%:h")<CR>/')
 
 vim.keymap.set('i', 'jk', '<esc>')
+vim.keymap.set('n', '<leader>s', ':source %<CR>')
+
