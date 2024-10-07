@@ -101,3 +101,5 @@ lspconfig.clangd.setup {
 }
 
 lspconfig.cmake.setup {}
+
+lspconfig.pylsp.setup {}
