@@ -229,6 +229,15 @@ require('packer').startup(function(use)
     end,
   }
 
+  use {"ellisonleao/carbon-now.nvim",
+    config = function()
+      require('carbon-now').setup {
+        open_cmd = 'open',
+        titlebar = '',
+      }
+    end,
+  }
+
   use {"salkin-mada/openscad.nvim",
     requires = "L3MON4D3/LuaSnip",
     config = function()
