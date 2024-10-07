@@ -40,6 +40,8 @@ require('packer').startup(function(use)
     end,
   }
 
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
   use 'kevinhwang91/nvim-bqf'  -- better quick fix window
 
   use 'nvim-tree/nvim-web-devicons'
