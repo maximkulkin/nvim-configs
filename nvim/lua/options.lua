@@ -73,3 +73,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     require('plenary.reload').reload_module(module)
   end,
 })
+
+local whichkey = require('which-key')
+whichkey.add({
+  {'<leader>b', group = 'Buffer'},
+  {'<leader>bd'},
+})
