@@ -63,6 +63,12 @@ require('packer').startup(function(use)
     end,
   }
 
+  use { 'hedyhli/outline.nvim',
+    config = function()
+      require('config.outline')
+    end,
+  }
+
   use { 'nvim-lualine/lualine.nvim',
     requires = {
       'nvim-tree/nvim-web-devicons',
