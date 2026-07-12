@@ -68,7 +68,7 @@ for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
   lua_runtime_paths[path] = true
 end
 
-lspconfig.lua_ls.setup {
+vim.lsp.config('lua_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
 
@@ -92,9 +92,9 @@ lspconfig.lua_ls.setup {
       },
     },
   },
-}
+})
 
-lspconfig.clangd.setup {
+vim.lsp.config('clangd', {
   on_attach = on_attach,
   capabilities = capabilities,
 
@@ -102,9 +102,9 @@ lspconfig.clangd.setup {
     clangd = {
     },
   },
-}
+})
 
-lspconfig.cmake.setup({})
+vim.lsp.config('cmake', {})
 
 local function get_python_path()
   local handle = io.popen("pyenv which python 2>/dev/null")
@@ -113,7 +113,7 @@ local function get_python_path()
   return vim.trim(result)
 end
 
-lspconfig.basedpyright.setup({
+vim.lsp.config('basedpyright', {
   settings = {
     python = {
       pythonPath = get_python_path(),
@@ -132,4 +132,4 @@ lspconfig.basedpyright.setup({
   },
 })
 
-lspconfig.ts_ls.setup({})
+vim.lsp.config('ts_ls', {})
