@@ -179,7 +179,7 @@ require('packer').startup(function(use)
 
         autocommands_create = true,
         commands_create = true,
-        silent = false,
+        silent = true,
         lookup_parents = true,
       })
     end,
