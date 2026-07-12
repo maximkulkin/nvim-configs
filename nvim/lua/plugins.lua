@@ -108,6 +108,7 @@ require('packer').startup(function(use)
       require('config.treesitter')
     end,
   }
+  -- Show current function context
   use { 'nvim-treesitter/nvim-treesitter-context',
     config = function()
       require('config.treesitter-context')
