@@ -91,6 +91,10 @@ require('packer').startup(function(use)
   }
 
   use { 'nvim-treesitter/nvim-treesitter',
+    requires = {
+      -- Experiment with TreeSitter
+      'nvim-treesitter/playground'
+    },
     config = function()
       require('config.treesitter')
     end,
