@@ -93,9 +93,9 @@ require('packer').startup(function(use)
     config = 'require("config.bufferline")',
   }
 
-  use { 'rcarriga/nvim-notify',
+  use { 'j-hui/fidget.nvim',
     config = function()
-      require('config.notify')
+      require('config.fidget')
     end,
   }
 
