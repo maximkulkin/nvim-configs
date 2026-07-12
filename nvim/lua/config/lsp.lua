@@ -1,8 +1,8 @@
 local lspconfig = require('lspconfig')
 
 local on_attach = function(client, _)
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
+  client.server_capabilities.documentFormattingProvider = true
+  client.server_capabilities.documentRangeFormattingProvider = true
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
