@@ -46,7 +46,7 @@ local function open_nvim_tree()
   vim.api.nvim_set_current_win(current_window)
 end
 
-vim.api.nvim_create_autocmd({"VimEnter"}, { callback = open_nvim_tree })
+-- vim.api.nvim_create_autocmd({"VimEnter"}, { callback = open_nvim_tree })
 
 vim.api.nvim_create_autocmd("QuitPre", {
   callback = function()
