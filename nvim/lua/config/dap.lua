@@ -1,12 +1,7 @@
 local dap, dapui = require('dap'), require('dapui')
 local mason_registry = require('mason-registry')
 
-dap.adapters.python = {
-  type = 'executable';
-  command = '/opt/homebrew/bin/python3';
-  args = { '-m', 'debugpy.adapter' };
-}
-
+require('dap-python').setup('~/.pyenv/shims/python3')
 
 dap.adapters.codelldb = function(on_config, _, _)
   local codelldb_root = mason_registry.get_package('codelldb'):get_install_path()
@@ -22,7 +17,6 @@ dap.adapters.codelldb = function(on_config, _, _)
       -- args = { '--port', '${port}' },
     },
   }
-  vim.print('config = ', config)
   on_config(config)
 end
 
@@ -61,9 +55,12 @@ dap.configurations.cpp = {
 dap.configurations.python = {
   {
     type = 'python',
+    name = 'Debug current file',
     request = 'launch',
-    name = 'Launch file',
     program = '${file}',
+    condition = {
+      filetype = 'python',
+    },
   },
 }
 
