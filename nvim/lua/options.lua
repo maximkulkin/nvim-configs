@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     vim.fn.glob(vim.fn.stdpath 'config' .. '/lua/**/*.lua', true, true, true)
   ),
   callback = function(opts)
-    local fp = vim.fn.fnamemodify(vim.gs.normalize(vim.api.nvim_buf_get_name(opts.buf)), ':r')
+    local fp = vim.fn.fnamemodify(vim.fs.normalize(vim.api.nvim_buf_get_name(opts.buf)), ':r')
     local module = string.gsub(fp, '^.*/nvim/lua/', ''):gsub('/', '.')
 
     require('plenary.reload').reload_module(module)
