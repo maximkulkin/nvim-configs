@@ -26,6 +26,7 @@ vim.opt.wildmode = "list:longest"
 vim.opt.laststatus = 3
 vim.opt.showmode = true
 
+-- show line numbers
 vim.opt.number = true
 vim.opt.numberwidth = 3
 vim.opt.relativenumber = true
@@ -36,7 +37,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.shortmess:append "sI"
 
 vim.opt.termguicolors = true
-vim.opt.timeoutlen = 400
+vim.opt.timeoutlen = 1000
 
 vim.opt.mouse = 'a'
 
