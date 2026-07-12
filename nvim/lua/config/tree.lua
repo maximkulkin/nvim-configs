@@ -68,6 +68,8 @@ vim.api.nvim_create_autocmd("QuitPre", {
   end
 })
 
+vim.api.nvim_set_hl(0, "NvimTreeExecFile", { fg = "#ff8080" })
+
 require('which-key').add({
   {'<leader>e', group = '󰙅 Tree'},
   {'<leader>ee', desc = 'Toggle tree'},
