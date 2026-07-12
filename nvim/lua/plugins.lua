@@ -41,6 +41,9 @@ require('packer').startup(function(use)
   }
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope-file-browser.nvim',
+    requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+  }
 
   use 'kevinhwang91/nvim-bqf'  -- better quick fix window
 
