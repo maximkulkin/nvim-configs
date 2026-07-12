@@ -20,37 +20,58 @@ dap.adapters.codelldb = function(on_config, _, _)
   on_config(config)
 end
 
-dap.configurations.c = {
-  {
-    name = 'run',
-    type = 'codelldb',
-    request = 'launch',
-    program = function()
-      local path = vim.fn.input({
-        prompt = 'Path to executable: ',
-        default = vim.fn.getcwd() .. '/',
-        completion = 'file',
-      })
-      return (path and path ~= '') and path or dap.ABORT
-    end,
-  },
-}
+-- dap.configurations.c = {
+--   {
+--     name = 'run',
+--     type = 'codelldb',
+--     request = 'launch',
+--     program = function()
+--       local path = vim.fn.input({
+--         prompt = 'Path to executable: ',
+--         default = vim.fn.getcwd() .. '/',
+--         completion = 'file',
+--       })
+--       return (path and path ~= '') and path or dap.ABORT
+--     end,
+--   },
+-- }
 
-dap.configurations.cpp = {
-  {
-    name = 'run',
-    type = 'codelldb',
-    request = 'launch',
-    program = function()
-      local path = vim.fn.input({
-        prompt = 'Path to executable: ',
-        default = vim.fn.getcwd() .. '/',
-        completion = 'file',
-      })
-      return (path and path ~= '') and path or dap.ABORT
-    end,
-  },
-}
+-- To configure a debug option on a per-project basis, add following code to .nvim.lua
+--
+--     vim.schedule(function()
+--       local dap = require('dap')
+--       dap.configurations.cpp = {
+--         {
+--           type = 'codelldb',
+--           request = 'launch',
+--           name = 'Debug MyApp',
+--           program = 'build/myapp',
+--           cwd = vim.fn.getcwd(),
+--         },
+--       }
+--     end
+--
+-- dap.configurations.cpp = {
+-- }
+
+-- To configure a debug option on a per-project basis, add following code to .nvim.lua
+--
+--     vim.schedule(function()
+--       local dap = require('dap')
+--       dap.configurations.python = {
+--         {
+--           type = 'python',
+--           request = 'launch',
+--           name = 'Debug MyApp',
+--           program = 'myapp/main.py',
+--           cwd = vim.fn.getcwd(),
+--           env = {
+--             PYTHONPATH = vim.fn.getcwd(),
+--           },
+--         },
+--       }
+--     end
+
 
 dap.configurations.python = {
   {
