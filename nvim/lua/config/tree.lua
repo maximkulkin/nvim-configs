@@ -8,6 +8,9 @@ require('nvim-tree').setup {
     enable = false,
     update_root = false,
   },
+  git = {
+    enable = true,
+  },
   view = {
     adaptive_size = false,
     side = 'left',
@@ -24,6 +27,7 @@ require('nvim-tree').setup {
   },
   filters = {
     dotfiles = true,
+    git_ignored = true,
   },
   actions = {
     open_file = {
