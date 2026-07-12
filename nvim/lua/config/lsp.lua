@@ -106,6 +106,30 @@ lspconfig.clangd.setup {
 
 lspconfig.cmake.setup({})
 
-lspconfig.pylsp.setup {}
+local function get_python_path()
+  local handle = io.popen("pyenv which python 2>/dev/null")
+  local result = handle:read("*a")
+  handle:close()
+  return vim.trim(result)
+end
+
+lspconfig.basedpyright.setup({
+  settings = {
+    python = {
+      pythonPath = get_python_path(),
+    },
+    basedpyright = {
+      autoSearchPaths = true,
+      analysis = {
+        autoImportCompletions = true,
+        diagnosticMode = 'openFilesOnly',
+        inlayHints = {
+          variableTypes = true,
+          callArgumentNames = true,
+        },
+      },
+    },
+  },
+})
 
 lspconfig.ts_ls.setup({})
