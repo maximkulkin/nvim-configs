@@ -134,6 +134,12 @@ require('packer').startup(function(use)
     end,
   }
 
+  use { 'stevanmilic/nvim-lspimport',
+    config = function()
+      require('config.lspimport')
+    end,
+  }
+
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
