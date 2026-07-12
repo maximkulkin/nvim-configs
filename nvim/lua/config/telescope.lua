@@ -93,6 +93,10 @@ telescope.load_extension('ui-select')
 local builtin = require('telescope.builtin')
 local file_browser = telescope.extensions.file_browser.file_browser
 
+local function telescope_notifications()
+  vim.cmd('Telescope notify')
+end
+
 local function file_browse_packer()
   file_browser({cwd = vim.fs.joinpath(vim.fn.stdpath('data'), "site/pack/packer")})
 end
@@ -112,7 +116,7 @@ vim.keymap.set('n', '<leader>fq', builtin.quickfix, {desc = 'Quickfix'})
 vim.keymap.set('n', '<leader>fl', builtin.loclist, {desc = 'Loclist'})
 vim.keymap.set('n', '<leader>fr', builtin.registers, {desc = 'Registers'})
 vim.keymap.set('n', '<leader>fm', builtin.marks, {desc = 'Marks'})
-vim.keymap.set('n', '<leader>fn', [[:Telescope notify<CR>]], {desc = 'Notifications'})
+vim.keymap.set('n', '<leader>fn', telescope_notifications, {desc = 'Notifications'})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = 'Help tags'})
 vim.keymap.set('n', '<leader>f/', builtin.search_history, {desc = 'Search history'})
 vim.keymap.set('n', '<leader>f-', builtin.resume, {desc = 'Last search'})
