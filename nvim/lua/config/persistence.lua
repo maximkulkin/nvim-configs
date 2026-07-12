@@ -1,17 +1,15 @@
 local persistence = require('persistence')
 persistence.setup()
 
-vim.keymap.set("n", "<leader>qs", persistence.save, {})
-vim.keymap.set("n", "<leader>ql", persistence.load, {})
-vim.keymap.set("n", "<leader>qe", persistence.start, {})
-vim.keymap.set("n", "<leader>qd", persistence.stop, {})
+vim.keymap.set("n", "<leader>qs", persistence.save, {desc = 'Session save'})
+vim.keymap.set("n", "<leader>ql", persistence.load, {desc = 'Session load'})
+vim.keymap.set("n", "<leader>qe", persistence.start, {desc = 'Session auto enable'})
+vim.keymap.set("n", "<leader>qd", persistence.stop, {desc = 'Session auto disable'})
 
-require('which-key').register({
-  ['<leader>q'] = {
-    name = 'Session',
-    s = 'Save session',
-    l = 'Load session',
-    e = 'Enable auto session',
-    d = 'Disable auto session',
-  },
+require('which-key').add({
+  {'<leader>q', group = 'Session'},
+  {'<leader>qe'},
+  {'<leader>qd'},
+  {'<leader>ql'},
+  {'<leader>qs'},
 })

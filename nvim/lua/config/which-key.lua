@@ -1,4 +1,5 @@
-require('which-key').setup {
+local whichkey = require('which-key')
+whichkey.setup {
   plugins = {
     marks = true,
     registers = true,
@@ -9,20 +10,27 @@ require('which-key').setup {
   },
   show_help = true,
   show_keys = true,
-  triggers = 'auto',
-  triggers_nowait = {
-    -- marks
-    '`',
-    "'",
-    "g`",
-    "g'",
-    -- registers
-    '"',
-    '<c-r>',
-    -- 
+  triggers = {
+    { 'auto', mode = 'nxso' },
   },
-  triggers_blacklist = {
-    i = { 'j', 'k' },
-    v = { 'j', 'k' },
-  },
+  delay = function(ctx)
+    return vim.tbl_contains({
+      -- marks
+      '`',
+      "'",
+      "g`",
+      "g'",
+      -- registers
+      '"',
+      '<c-r>',
+    }, ctx.keys) and 0 or 300
+  end,
+  -- triggers_blacklist = {
+  --   i = { 'j', 'k' },
+  --   v = { 'j', 'k' },
+  -- },
 }
+
+vim.keymap.set('n', '<leader>?', function()
+  whichkey.show({global = false})
+end, {})

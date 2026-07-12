@@ -2,8 +2,8 @@ require("toggleterm").setup {
   direction = 'float',
 }
 
-vim.keymap.set('n', '<leader>tt', ':ToggleTerm<CR>')
+vim.keymap.set('n', '<leader>tt', ':ToggleTerm<CR>', {desc = 'Toggle terminal'})
 
-require('which-key').register({
-  ['<leader>tt'] = 'Toggle terminal',
+require('which-key').add({
+  {'<leader>tt'},
 })

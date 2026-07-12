@@ -18,17 +18,17 @@ vim.api.nvim_create_user_command('NeotestOutput', neotest.output.open, {})
 vim.api.nvim_create_user_command('NeotestSummaryToggle', neotest.summary.toggle, {})
 
 
-vim.keymap.set('n', '<leader>tr', ':NeotestRun<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>ts', ':NeotestStop<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>to', ':NeotestOutput<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>tf', ':NeotestRunFile<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>tl', ':NeotestRunLast<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<leader>tO', ':NeotestSummaryToggle<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>tr', ':NeotestRun<CR>', {noremap = true, silent = true, desc = 'Test run'})
+vim.keymap.set('n', '<leader>ts', ':NeotestStop<CR>', {noremap = true, silent = true, desc = 'Test stop'})
+vim.keymap.set('n', '<leader>to', ':NeotestOutput<CR>', {noremap = true, silent = true, desc = 'Test show output'})
+vim.keymap.set('n', '<leader>tf', ':NeotestRunFile<CR>', {noremap = true, silent = true, desc = 'Test run file'})
+vim.keymap.set('n', '<leader>tl', ':NeotestRunLast<CR>', {noremap = true, silent = true, desc = 'Test run last'})
+vim.keymap.set('n', '<leader>tO', ':NeotestSummaryToggle<CR>', {noremap = true, silent = true, desc = 'Test show panel'})
 
-require('which-key').register({
-  ['<leader>tr'] = 'Test run',
-  ['<leader>ts'] = 'Test stop',
-  ['<leader>to'] = 'Test output',
-  ['<leader>tf'] = 'Test run file',
-  ['<leader>tl'] = 'Test run last',
+require('which-key').add({
+  { '<leader>tr' },
+  { '<leader>ts' },
+  { '<leader>to' },
+  { '<leader>tf' },
+  { '<leader>tl' },
 })

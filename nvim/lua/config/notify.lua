@@ -4,6 +4,6 @@ vim.keymap.set('n', '<leader>nd', function()
   notify.dismiss()
 end, {noremap = true, silent = true})
 
-require('which-key').register({
-  ['<leader>nd'] = 'Notification dismiss',
+require('which-key').add({
+  {'<leader>nd', desc = 'Notification dismiss'},
 })

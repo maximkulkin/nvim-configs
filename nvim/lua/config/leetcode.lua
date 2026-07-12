@@ -20,23 +20,21 @@ require('leetcode').setup {
           vim.cmd([[ NvimTreeClose ]])
         end)
 
-        vim.keymap.set('n', '<leader>lm', ':Leet menu<CR>')
-        vim.keymap.set('n', '<leader>ll', ':Leet list<CR>')
-        vim.keymap.set('n', '<leader>ld', ':Leet desc<CR>')
-        vim.keymap.set('n', '<leader>lc', ':Leet console<CR>')
-        vim.keymap.set('n', '<leader>lr', ':Leet run<CR>')
-        vim.keymap.set('n', '<leader>ls', ':Leet submit<CR>')
+        vim.keymap.set('n', '<leader>lm', ':Leet menu<CR>', {desc = 'LeetCode menu'})
+        vim.keymap.set('n', '<leader>ll', ':Leet list<CR>', {desc = 'LeetCode list problems'})
+        vim.keymap.set('n', '<leader>ld', ':Leet desc<CR>', {desc = 'LeetCode description'})
+        vim.keymap.set('n', '<leader>lc', ':Leet console<CR>', {desc = 'LeetCode console'})
+        vim.keymap.set('n', '<leader>lr', ':Leet run<CR>', {desc = 'LeetCode run'})
+        vim.keymap.set('n', '<leader>ls', ':Leet submit<CR>', {desc = 'LeetCode submit'})
 
-        require('which-key').register({
-          ['<leader>l'] = {
-            name = 'Leetcoode',
-            m = 'Leetcode Menu',
-            l = 'Leetcode List',
-            d = 'Leetcode Description',
-            c = 'Leetcode Console',
-            r = 'Leetcode Run',
-            s = 'Leetcode Submit',
-          },
+        require('which-key').add({
+          {'<leader>l', group = 'LeetCode'},
+          {'<leader>lm'},
+          {'<leader>ll'},
+          {'<leader>ld'},
+          {'<leader>lc'},
+          {'<leader>lr'},
+          {'<leader>ls'},
         })
       end,
     },

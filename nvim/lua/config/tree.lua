@@ -64,10 +64,8 @@ vim.api.nvim_create_autocmd("QuitPre", {
   end
 })
 
-require('which-key').register({
-  ['<leader>e'] = {
-    name = '󰙅 Tree',
-    e = 'Toggle tree',
-    f = 'Show current file in tree',
-  },
+require('which-key').add({
+  {'<leader>e', group = '󰙅 Tree'},
+  {'<leader>ee', desc = 'Toggle tree'},
+  {'<leader>ef', desc = 'Show current file in tree'},
 })

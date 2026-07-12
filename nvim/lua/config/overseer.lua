@@ -149,39 +149,42 @@ local function open_overseer_tasks_picker()
   }):find()
 end
 
--- vim.keymap.set("n", "<leader>rr", function()
---   overseer.run_template({autostart = false, first = false})
--- end, {})
-vim.keymap.set("n", "<leader>rr", open_overseer_templates_picker, {})
-vim.keymap.set("n", "<leader>rt", open_overseer_tasks_picker, {})
-vim.keymap.set("n", "<leader>ra", '<cmd>OverseerTaskAction<cr>', {})
-vim.keymap.set("n", "<leader>rq", '<cmd>OverseerQuickAction<cr>', {})
-vim.keymap.set("n", "<leader>ri", '<cmd>OverseerInfo<cr>', {})
-vim.keymap.set("n", "<leader>rb", function()
-  overseer.run_template({tags = {overseer.TAG.BUILD}})
-end, {})
-
--- telescope.register_extension({
---   exports = {
---     overseer_tasks = overseer_tasks_picker(),
---   }
--- })
-
 vim.api.nvim_create_autocmd({"VimEnter", "DirChanged"}, {
-  callback = function(ev)
+  callback = function()
     local cwd = vim.v.cwd or vim.fn.getcwd()
     require("overseer").preload_task_cache({ dir = cwd })
   end,
 })
 
-require('which-key').register({
-  ['<leader>r'] = {
-    name = "Overseer",
-    i = 'Overseer Info',
-    r = 'Overseer Run',
-    t = 'Overseer Tasks',
-    b = 'Overseer Build',
-    a = 'Overseer Task Action',
-    q = 'Overseer Quick Action',
-  },
+local function overseer_run()
+  overseer.run_template({tags = {overseer.TAG.RUN}})
+end
+
+local function overseer_build()
+  overseer.run_template({tags = {overseer.TAG.BUILD}})
+end
+
+vim.keymap.set("n", "<leader>re", open_overseer_templates_picker, {desc = 'Overseer execute'})
+vim.keymap.set("n", "<leader>rt", open_overseer_tasks_picker, {desc = 'Overseer tasks'})
+
+vim.keymap.set("n", "<leader>ri", '<cmd>OverseerInfo<cr>', {desc = 'Overseer info'})
+vim.keymap.set("n", "<leader>ra", '<cmd>OverseerTaskAction<cr>', {desc = 'Overseer task action'})
+vim.keymap.set("n", "<leader>rq", '<cmd>OverseerQuickAction<cr>', {desc = 'Overseer quick action'})
+
+vim.keymap.set("n", "<leader>rb", overseer_build, {desc = 'Overseer build'})
+vim.keymap.set("n", "<leader>rr", overseer_run, {desc = 'Overseer run'})
+
+
+require('which-key').add({
+  {'<leader>r', group = 'Overseer'},
+
+  {'<leader>re'},
+  {'<leader>rt'},
+
+  {'<leader>ri'},
+  {'<leader>ra'},
+  {'<leader>rq'},
+
+  {'<leader>rb'},
+  {'<leader>rr'},
 })

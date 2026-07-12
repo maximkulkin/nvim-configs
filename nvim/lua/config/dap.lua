@@ -81,37 +81,50 @@ dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end
 
-vim.keymap.set('n', '<leader>dc', dap.continue)
-vim.keymap.set('n', '<C-S-j>', dap.step_over)
-vim.keymap.set('n', '<C-S-l>', dap.step_into)
-vim.keymap.set('n', '<C-S-k>', dap.step_out)
-vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
-vim.keymap.set('n', '<leader>dB', dap.set_breakpoint)
-vim.keymap.set('n', '<leader>dr', dap.restart)
-vim.keymap.set('n', '<leader>dl', dap.run_last)
-vim.keymap.set('n', '<leader>dt', dap.terminate)
-vim.keymap.set('n', '<leader>dR', dap.repl.toggle)
-vim.keymap.set({'n', 'v'}, '<leader>dp', function()
-  require('dap.ui.widgets').preview()
-end)
-vim.keymap.set('n', '<leader>df', function()
-  local widgets = require('dap.ui.widgets')
-  widgets.centered_float(widgets.frames)
-end)
+local widgets = require('dap.ui.widgets')
 
-require('which-key').register({
-  ['<leader>d'] = {
-    c = 'Debug continue',
-    b = 'Debug toggle breakpoint',
-    B = 'Debug set breakpoint',
-    r = 'Debug restart',
-    l = 'Debug run last',
-    t = 'Debug terminate',
-    R = 'Debug REPL toggle',
-    p = 'Debug preview value',
-    f = 'Debug show frames',
-  },
-  ['<C-S-j>'] = 'Debug step over',
-  ['<C-S-l>'] = 'Debug step into',
-  ['<C-S-k>'] = 'Debug step out',
+local function show_frames()
+  widgets.centered_float(widgets.frames)
+end
+
+vim.keymap.set('n', '<leader>dr', '<cmd>Telescope dap configurations<cr>', {desc = 'Debug run configuration'})
+vim.keymap.set('n', '<leader>dR', dap.restart, {desc = 'Debug restart'})
+vim.keymap.set('n', '<leader>dL', dap.run_last, {desc = 'Debug run last configuration'})
+vim.keymap.set('n', '<leader>dt', dap.terminate, {desc = 'Debug terminate'})
+vim.keymap.set('n', '<leader>dc', dap.continue, {desc = 'Debug continue'})
+vim.keymap.set('n', '<leader>dj', dap.step_over, {desc = 'Debug step over (shortcut C-S-j)'})
+vim.keymap.set('n', '<leader>dl', dap.step_into, {desc = 'Debug step into (shortcut C-S-l)'})
+vim.keymap.set('n', '<leader>dk', dap.step_out, {desc = 'Debug step out (shortcut C-S-k)'})
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {desc = 'Debug toggle breakpoint'})
+vim.keymap.set('n', '<leader>dB', dap.set_breakpoint, {desc = 'Debug set breakpoint'})
+vim.keymap.set('n', '<leader>dE', dap.repl.toggle, {desc = 'Debug REPL toggle'})
+vim.keymap.set({'n', 'v'}, '<leader>dp', widgets.preview, {desc = 'Debug preview value'})
+vim.keymap.set('n', '<leader>df', show_frames, {desc = 'Debug show frames'})
+vim.keymap.set('n', '<leader>du', dapui.toggle, {desc = 'Toggle Debug UI'})
+
+-- Shortcuts for debug step execution
+vim.keymap.set('n', '<C-S-j>', dap.step_over, {desc = 'Debug step over'})
+vim.keymap.set('n', '<C-S-l>', dap.step_into, {desc = 'Debug step into'})
+vim.keymap.set('n', '<C-S-k>', dap.step_out, {desc = 'Debug step out'})
+
+require('which-key').add({
+  {'<leader>d', group = 'Debug'},
+  {'<leader>dr'},
+  {'<leader>dR'},
+  {'<leader>dL'},
+  {'<leader>dc'},
+  {'<leader>dt'},
+  {'<leader>dj'},
+  {'<leader>dk'},
+  {'<leader>dl'},
+  {'<leader>db'},
+  {'<leader>dB'},
+  {'<leader>dE'},
+  {'<leader>df'},
+  {'<leader>dp'},
+  {'<leader>du'},
+
+  {'<C-S-j>'},
+  {'<C-S-k>'},
+  {'<C-S-l>'},
 })

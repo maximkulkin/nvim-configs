@@ -1,8 +1,12 @@
 require('neoclip').setup({})
 require('telescope').load_extension('neoclip')
 
-vim.keymap.set('n', '<leader>fp', ':Telescope neoclip<CR>')
+local function NeoClip()
+  vim.cmd('Telescope neoclip')
+end
 
-require('which-key').register({
-  ['<leader>fp'] = 'Paste from yank history',
+vim.keymap.set('n', '<leader>fp', NeoClip, {desc = 'Paste from yank history'})
+
+require('which-key').add({
+  {'<leader>fp'},
 })

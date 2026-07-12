@@ -28,40 +28,56 @@ local function list_workspace_folders()
   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end
 
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition)
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
-vim.keymap.set('n', 'K',  vim.lsp.buf.hover)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-vim.keymap.set('n', '<c-s-k>', vim.lsp.buf.signature_help)
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
-vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder)
-vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder)
-vim.keymap.set('n', '<leader>wl', list_workspace_folders)
-vim.keymap.set('n', '<leader><C-e>', [[:ClangdSwitchSourceHeader<cr>]], {})
+local function rename_symbol()
+  local old_name = vim.fn.expand('<cword>')
+  local new_name = vim.fn.input('New name: ', old_name)
+  vim.lsp.buf.rename(new_name)
+end
 
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {})
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {})
 
-require('which-key').register({
-  g = {
-    name = 'Goto',
-    d = 'Goto Definition',
-    D = 'Goto Declaration',
-    i = 'Goto Implementation',
-    r = 'Goto References',
-  },
-  K = 'Show type info of symbol under cursor',
-  ['<C-S-k>'] = 'Signature help',
-  ['<leader>w'] = {
-    name = 'Workspace',
-    l = 'List Workspace',
-    a = 'Add directory to workspace',
-    r = 'Remove directory from workspace',
-  },
-  ['[d'] = 'Previous diagnostic',
-  [']d'] = 'Next diagnostic',
+local function prev_diagnostic()
+  vim.diagnostic.jump({count = -1, float = true})
+end
+
+local function next_diagnostic()
+  vim.diagnostic.jump({count = 1, float = true})
+end
+
+vim.keymap.set({'n', 'i'}, '<C-S-i>', vim.lsp.buf.signature_help, {desc = 'Signature help'})
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {desc = 'Code actions'})
+vim.keymap.set('n', '<leader>crr', rename_symbol, {desc = 'Rename symbol'})
+vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, {desc = 'Add directory to workspace'})
+vim.keymap.set('n', '<leader>wl', list_workspace_folders, {desc = 'List Workspace'})
+vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, {desc = 'Remove directory from workspace'})
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {desc = 'Goto Declaration'})
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'Goto Definition'})
+vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, {desc = 'Goto Definition'})
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {desc = 'Goto Implementation'})
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, {desc = 'Goto References'})
+
+vim.keymap.set('n', '[d', prev_diagnostic, {desc = 'Previous diagnostic'})
+vim.keymap.set('n', ']d', next_diagnostic, {desc = 'Next diagnostic'})
+
+require('which-key').add({
+  {'[d'},
+  {']d'},
+  {'<C-S-i>'},
+
+  {'<leader>c', group = 'Code'},
+  {'<leader>ca'},
+  {'<leader>crr'},
+
+  {'<leader>w', group = 'Workspace'},
+  {'<leader>wa'},
+  {'<leader>wl'},
+  {'<leader>wr'},
+
+  {'g', group = 'Goto'},
+  {'gD'},
+  {'gd'},
+  {'gt'},
+  {'gi'},
+  {'gr'},
 })
 
 local lua_runtime_paths = {}

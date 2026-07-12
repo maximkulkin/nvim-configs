@@ -53,37 +53,38 @@ telescope.load_extension('ui-select')
 
 local builtin = require('telescope.builtin')
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files)
-vim.keymap.set('n', '<leader>fb', builtin.buffers)
-vim.keymap.set('n', '<leader>fc', builtin.command_history)
-vim.keymap.set('n', '<leader>fd', builtin.diagnostics)
-vim.keymap.set('n', '<leader>fg', builtin.live_grep)
-vim.keymap.set('n', '<leader>fw', builtin.grep_string)
-vim.keymap.set('n', '<leader>fq', builtin.quickfix)
-vim.keymap.set('n', '<leader>fl', builtin.loclist)
-vim.keymap.set('n', '<leader>fr', builtin.registers)
-vim.keymap.set('n', '<leader>fm', builtin.marks)
-vim.keymap.set('n', '<leader>fn', [[:Telescope notify<CR>]])
-vim.keymap.set('n', '<leader>fh', builtin.help_tags)
-vim.keymap.set('n', '<leader>f/', builtin.search_history)
-vim.keymap.set('n', '<leader>f-', builtin.resume)
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = 'Files'})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = 'Buffers'})
+vim.keymap.set('n', '<leader>fc', builtin.command_history, {desc = 'Command history'})
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {desc = 'Diagnostics'})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = 'Grep'})
+vim.keymap.set('n', '<leader>fw', builtin.grep_string, {desc = 'Find word under cursor'})
+vim.keymap.set('n', '<leader>fq', builtin.quickfix, {desc = 'Quickfix'})
+vim.keymap.set('n', '<leader>fl', builtin.loclist, {desc = 'Loclist'})
+vim.keymap.set('n', '<leader>fr', builtin.registers, {desc = 'Registers'})
+vim.keymap.set('n', '<leader>fm', builtin.marks, {desc = 'Marks'})
+vim.keymap.set('n', '<leader>fn', [[:Telescope notify<CR>]], {desc = 'Notifications'})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = 'Help tags'})
+vim.keymap.set('n', '<leader>f/', builtin.search_history, {desc = 'Search history'})
+vim.keymap.set('n', '<leader>f-', builtin.resume, {desc = 'Last search'})
 
-require('which-key').register({
-  ['<leader>f'] = {
-    name = ' Find',
-    b = 'Buffers',
-    c = 'Command history',
-    d = 'Diagnostics',
-    f = 'Files',
-    g = 'Grep',
-    h = 'Help Tags',
-    l = 'Loclist',
-    m = 'Bookmarks',
-    n = 'Notifications',
-    q = 'Quickfix',
-    r = 'Registers',
-    w = 'Word under cursor',
-    ['/'] = 'Search history',
-    ['-'] = 'Last search',
-  },
+vim.keymap.set('n', '<leader>ec', function() builtin.find_files({cwd = vim.fn.stdpath('config')}) end, {desc = 'Fine file in Neovim config'})
+
+require('which-key').add({
+  {'<leader>f', group = ' Find'},
+  {'<leader>f-'},
+  {'<leader>f/'},
+  {'<leader>fb'},
+  {'<leader>fc'},
+  {'<leader>fd'},
+  {'<leader>ff'},
+  {'<leader>fg'},
+  {'<leader>fh'},
+  {'<leader>fl'},
+  {'<leader>fm'},
+  {'<leader>fn'},
+  {'<leader>fq'},
+  {'<leader>fr'},
+  {'<leader>fw'},
+  {'<leader>ec'},
 })
