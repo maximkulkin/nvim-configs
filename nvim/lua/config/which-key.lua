@@ -11,7 +11,7 @@ whichkey.setup {
   show_help = true,
   show_keys = true,
   triggers = {
-    { 'auto', mode = 'nxso' },
+    { '<auto>', mode = 'nxso' },
   },
   delay = function(ctx)
     return vim.tbl_contains({
@@ -25,12 +25,8 @@ whichkey.setup {
       '<c-r>',
     }, ctx.keys) and 0 or 300
   end,
-  -- triggers_blacklist = {
-  --   i = { 'j', 'k' },
-  --   v = { 'j', 'k' },
-  -- },
 }
 
 vim.keymap.set('n', '<leader>?', function()
   whichkey.show({global = false})
-end, {})
+end, {desc = 'Show keymap help'})
