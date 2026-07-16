@@ -110,9 +110,14 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = 'Files'})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = 'Buffers'})
 vim.keymap.set('n', '<leader>fc', builtin.command_history, {desc = 'Command history'})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {desc = 'Diagnostics'})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = 'Grep'})
+vim.keymap.set('n', '<leader>fs', builtin.live_grep, {desc = 'Live grep'})
+vim.keymap.set('n', '<leader>fgb', builtin.git_branches, {desc = 'Git branches'})
+vim.keymap.set('n', '<leader>fgc', builtin.git_commits, {desc = 'Git commits'})
+vim.keymap.set('n', '<leader>fgs', builtin.git_status, {desc = 'Git status'})
+vim.keymap.set('n', '<leader>fgt', builtin.git_stash, {desc = 'Git stash'})
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, {desc = 'Find word under cursor'})
 vim.keymap.set('n', '<leader>fq', builtin.quickfix, {desc = 'Quickfix'})
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {desc = 'Keymaps'})
 vim.keymap.set('n', '<leader>fl', builtin.loclist, {desc = 'Loclist'})
 vim.keymap.set('n', '<leader>fr', builtin.registers, {desc = 'Registers'})
 vim.keymap.set('n', '<leader>fm', builtin.marks, {desc = 'Marks'})
@@ -133,8 +138,14 @@ require('which-key').add({
   {'<leader>fc'},
   {'<leader>fd'},
   {'<leader>ff'},
-  {'<leader>fg'},
+  {'<leader>fs'},
+  {'<leader>fg', group = 'Git'},
+  {'<leader>fgb'},
+  {'<leader>fgc'},
+  {'<leader>fgs'},
+  {'<leader>fgt'},
   {'<leader>fh'},
+  {'<leader>fk'},
   {'<leader>fl'},
   {'<leader>fm'},
   {'<leader>fn'},
