@@ -106,17 +106,10 @@ vim.lsp.config('clangd', {
 
 vim.lsp.config('cmake', {})
 
-local function get_python_path()
-  local handle = io.popen("pyenv which python 2>/dev/null")
-  local result = handle:read("*a")
-  handle:close()
-  return vim.trim(result)
-end
-
 vim.lsp.config('basedpyright', {
   settings = {
     python = {
-      pythonPath = get_python_path(),
+      pythonPath = vim.fn.exepath("python") or "python",
     },
     basedpyright = {
       autoSearchPaths = true,
@@ -133,3 +126,9 @@ vim.lsp.config('basedpyright', {
 })
 
 vim.lsp.config('ts_ls', {})
+
+vim.lsp.enable('basedpyright')
+vim.lsp.enable('clangd')
+vim.lsp.enable('cmake')
+vim.lsp.enable('luals')
+vim.lsp.enable('ts_ls')
