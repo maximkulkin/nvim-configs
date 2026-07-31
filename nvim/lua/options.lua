@@ -77,5 +77,5 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 local whichkey = require('which-key')
 whichkey.add({
   {'<leader>b', group = 'Buffer'},
-  {'<leader>bd'},
+  {'<leader>bd', desc = 'Buffer delete'},
 })
