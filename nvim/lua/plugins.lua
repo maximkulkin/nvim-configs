@@ -44,6 +44,7 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-file-browser.nvim',
     requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
   }
+  use 'nvim-telescope/telescope-symbols.nvim'
 
   use 'kevinhwang91/nvim-bqf'  -- better quick fix window
 
