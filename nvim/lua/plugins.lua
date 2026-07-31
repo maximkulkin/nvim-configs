@@ -48,6 +48,14 @@ require('packer').startup(function(use)
 
   use 'kevinhwang91/nvim-bqf'  -- better quick fix window
 
+  use {'s1n7ax/nvim-window-picker',
+    tag = 'v2.*',
+    config = function()
+      require('window-picker').setup()
+    end,
+  }
+
+
   use 'nvim-tree/nvim-web-devicons'
   use {'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
