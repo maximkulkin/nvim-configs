@@ -6,6 +6,9 @@ neotest.setup({
       runner = "pytest",
     }),
   },
+  consumers = {
+    neotree = require('neotest.consumers.neotree'),
+  },
 })
 
 local function neotest_output()

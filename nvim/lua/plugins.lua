@@ -48,9 +48,16 @@ require('packer').startup(function(use)
   use 'kevinhwang91/nvim-bqf'  -- better quick fix window
 
   use 'nvim-tree/nvim-web-devicons'
-  use {'nvim-tree/nvim-tree.lua',
+  use {'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'TimCreasman/neo-tree-tests-source.nvim',
+    },
     config = function()
-      require('config.tree')
+      require('config.neotree')
     end,
   }
 

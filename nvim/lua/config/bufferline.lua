@@ -3,9 +3,9 @@ require('bufferline').setup {
     close_command = 'Bdelete %d',
     offsets = {
       {
-        filetype = 'NvimTree',
-        text = 'File Explorer',
-        text_align = 'left',
+        filetype = 'neo-tree',
+        text = '',
+        text_align = 'center',
         separator = true,
       },
     },
