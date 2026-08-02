@@ -1,65 +1,58 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
-end
+return {
+  { "catppuccin/nvim", as = "catppuccin" },
 
-local packer_bootstrap = ensure_packer()
-
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-
-  use { "catppuccin/nvim", as = "catppuccin" }
-
-  use { 'alexghergh/nvim-tmux-navigation',
+  { 'alexghergh/nvim-tmux-navigation',
     config = function()
       require('config.tmux-navigation')
     end,
-  }
+  },
 
-  use { 'lukas-reineke/indent-blankline.nvim',
+  { 'lukas-reineke/indent-blankline.nvim',
     config = function()
       require('config.indent-blankline')
     end,
-  }
+  },
 
-  use 'tpope/vim-sleuth'  -- auto detect tabsize and shiftwidth
+  'tpope/vim-sleuth',  -- auto detect tabsize and shiftwidth
 
-  use 'nvim-lua/plenary.nvim'
-  use { 'nvim-telescope/telescope.nvim',
-    requires = {
+  'nvim-lua/plenary.nvim',
+
+  { 'nvim-telescope/telescope.nvim',
+    dependencies = {
       'nvim-telescope/telescope-ui-select.nvim',
     },
     config = function()
       require('config.telescope')
     end,
-  }
+  },
 
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use { 'nvim-telescope/telescope-file-browser.nvim',
-    requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-  }
-  use 'nvim-telescope/telescope-symbols.nvim'
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install' },
+  { 'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+  },
+  'nvim-telescope/telescope-symbols.nvim',
 
-  use 'kevinhwang91/nvim-bqf'  -- better quick fix window
+  'kevinhwang91/nvim-bqf',  -- better quick fix window
 
-  use {'s1n7ax/nvim-window-picker',
-    tag = 'v2.*',
+  {'s1n7ax/nvim-window-picker',
+    name = 'window-picker',
+    event = 'VeryLazy',
+    version = '2.*',
     config = function()
       require('window-picker').setup()
     end,
-  }
+  },
 
+  {'ibhagwan/fzf-lua',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
 
-  use 'nvim-tree/nvim-web-devicons'
-  use {'nvim-neo-tree/neo-tree.nvim',
+  'nvim-tree/nvim-web-devicons',
+  {'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
-    requires = {
+    dependencies = {
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
       'nvim-tree/nvim-web-devicons',
@@ -68,123 +61,125 @@ require('packer').startup(function(use)
     config = function()
       require('config.neotree')
     end,
-  }
+  },
 
-  use { 'linrongbin16/lsp-progress.nvim',
-    requires = {
+  { 'linrongbin16/lsp-progress.nvim',
+    dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
       require('lsp-progress').setup {}
     end,
-  }
+  },
 
-  use { 'hedyhli/outline.nvim',
+  { 'hedyhli/outline.nvim',
     config = function()
       require('config.outline')
     end,
-  }
+  },
 
-  use { 'nvim-lualine/lualine.nvim',
-    requires = {
+  { 'nvim-lualine/lualine.nvim',
+    dependencies = {
       'nvim-tree/nvim-web-devicons',
       'linrongbin16/lsp-progress.nvim',
     },
     config = function()
       require('config.statusline')
     end,
-  }
+  },
 
-  use { 'simeji/winresizer',
+  { 'simeji/winresizer',
     config = function()
       require('config.winresizer')
     end,
-  }
+  },
 
-  use { 'akinsho/bufferline.nvim',
-    requires = {
+  { 'akinsho/bufferline.nvim',
+    dependencies = {
       'nvim-tree/nvim-web-devicons',
       'famiu/bufdelete.nvim',
     },
     config = 'require("config.bufferline")',
-  }
+  },
 
-  use { 'j-hui/fidget.nvim',
+  { 'j-hui/fidget.nvim',
     config = function()
       require('config.fidget')
     end,
-  }
+  },
 
-  use { 'nvim-treesitter/nvim-treesitter',
-    branch = 'main',
+  { 'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'neovim-treesitter/treesitter-parser-registry' },
+    lazy = false,
+    build = ':TSUpdate',
     config = function()
       require('config.treesitter')
     end,
-  }
+  },
   -- Show current function context
-  use { 'nvim-treesitter/nvim-treesitter-context',
+  { 'nvim-treesitter/nvim-treesitter-context',
     config = function()
       require('config.treesitter-context')
     end,
-  }
+  },
 
-  use { 'williamboman/mason.nvim',
+  { 'williamboman/mason.nvim',
     config = function()
       require('config.mason')
     end,
-  }
+  },
 
-  use 'milisims/nvim-luaref'  -- Lua reference
+  'milisims/nvim-luaref',  -- Lua reference
   -- Lua LSP support
-  use { 'folke/neodev.nvim',
+  { 'folke/neodev.nvim',
     config = function()
       require('neodev').setup({})
     end,
-  }
+  },
 
-  use { 'neovim/nvim-lspconfig',
+  { 'neovim/nvim-lspconfig',
     config = function()
       require('config.lsp')
     end,
-  }
+  },
 
-  use { 'stevanmilic/nvim-lspimport',
+  { 'stevanmilic/nvim-lspimport',
     config = function()
       require('config.lspimport')
     end,
-  }
+  },
 
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use { 'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  { 'hrsh7th/nvim-cmp',
     config = function()
       require('config.cmp')
     end,
-  }
+  },
 
-  use { 'AckslD/nvim-neoclip.lua',
+  { 'AckslD/nvim-neoclip.lua',
     config = function()
       require('config.neoclip')
     end,
-  }
-  use { "folke/trouble.nvim",
+  },
+  { "folke/trouble.nvim",
     config = function()
       require('config.trouble')
     end,
-  }
-  use { "folke/which-key.nvim",
+  },
+  { "folke/which-key.nvim",
     config = function()
       require('config.which-key')
     end,
-  }
-  use { "folke/persistence.nvim",
+  },
+  { "folke/persistence.nvim",
     config = function()
       require('config.persistence')
     end,
-  }
-  use { "klen/nvim-config-local",
+  },
+  { "klen/nvim-config-local",
     config = function()
       require('config-local').setup({
         config_files = { '.nvim.lua' },
@@ -196,16 +191,16 @@ require('packer').startup(function(use)
         lookup_parents = true,
       })
     end,
-  }
+  },
 
-  use { 'lewis6991/gitsigns.nvim',
+  { 'lewis6991/gitsigns.nvim',
     config = function()
       require('config.gitsigns')
     end,
-  }
-  use { 'tpope/vim-fugitive' }
+  },
+  { 'tpope/vim-fugitive' },
 
-  use { "mfussenegger/nvim-dap",
+  { "mfussenegger/nvim-dap",
     opt = true,
     event = "BufReadPre",
     module = { "dap" },
@@ -216,7 +211,7 @@ require('packer').startup(function(use)
       "nvim-dap-python",
       "which-key.nvim",
     },
-    requires = {
+    dependencies = {
       "Pocco81/DAPInstall.nvim",
       "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
@@ -226,25 +221,25 @@ require('packer').startup(function(use)
     config = function()
       require("config.dap")
     end,
-  }
+  },
 
-  -- use 'bfredl/nvim-luadev'
-  use 'ii14/neorepl.nvim'
+  -- 'bfredl/nvim-luadev',
+  'ii14/neorepl.nvim',
 
-  use { "ariel-frischer/bmessages.nvim",
+  { "ariel-frischer/bmessages.nvim",
     config = function()
       require("bmessages").setup({})
     end,
-  }
+  },
 
-  use { 'stevearc/overseer.nvim',
+  { 'stevearc/overseer.nvim',
     config = function()
       require('config.overseer')
     end,
-  }
+  },
 
-  use {"nvim-neotest/neotest",
-    requires = {
+  {"nvim-neotest/neotest",
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -254,56 +249,43 @@ require('packer').startup(function(use)
     config = function()
       require('config.neotest')
     end,
-  }
-  use {"akinsho/toggleterm.nvim",
-    tag = '*',
+  },
+  {"akinsho/toggleterm.nvim",
+    version = '*',
     config = function()
       require("config.toggleterm")
     end,
-  }
+  },
 
-  use {"ellisonleao/carbon-now.nvim",
+  {"ellisonleao/carbon-now.nvim",
     config = function()
       require('carbon-now').setup {
         open_cmd = 'open',
         titlebar = '',
       }
     end,
-  }
+  },
 
-  use {"salkin-mada/openscad.nvim",
-    requires = "L3MON4D3/LuaSnip",
+  {"salkin-mada/openscad.nvim",
+    dependencies = "L3MON4D3/LuaSnip",
     config = function()
       require("config.openscad")
     end,
-  }
+  },
 
-  use {"kawre/leetcode.nvim",
-    requires = {
+  {"kawre/leetcode.nvim",
+    dependencies = {
       "nvim-telescope/telescope.nvim",
       "MunifTanjim/nui.nvim",
     },
     config = function()
       require("config.leetcode")
     end,
-  }
+  },
 
-  use {"Civitasv/cmake-tools.nvim",
+  {"Civitasv/cmake-tools.nvim",
     config = function()
       require("config.cmake_tools")
     end,
-  }
-end)
-
-if packer_bootstrap then
-  require('packer').sync()
-end
-
-vim.api.nvim_create_augroup('packer_user_config', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'packer_user_config',
-  pattern = 'plugins.lua',
-  callback = function()
-    vim.cmd([[source <afile> | PackerCompile]])
-  end,
-})
+  },
+}
