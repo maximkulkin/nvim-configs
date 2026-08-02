@@ -67,9 +67,7 @@ return {
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
-    config = function()
-      require('lsp-progress').setup {}
-    end,
+    opts = {},
   },
 
   { 'hedyhli/outline.nvim',
@@ -131,11 +129,7 @@ return {
 
   'milisims/nvim-luaref',  -- Lua reference
   -- Lua LSP support
-  { 'folke/neodev.nvim',
-    config = function()
-      require('neodev').setup({})
-    end,
-  },
+  { 'folke/neodev.nvim', opts = {} },
 
   { 'neovim/nvim-lspconfig',
     config = function()
@@ -226,11 +220,7 @@ return {
   -- 'bfredl/nvim-luadev',
   'ii14/neorepl.nvim',
 
-  { "ariel-frischer/bmessages.nvim",
-    config = function()
-      require("bmessages").setup({})
-    end,
-  },
+  { "ariel-frischer/bmessages.nvim", event = 'CmdlineEnter', opts = {} },
 
   { 'stevearc/overseer.nvim',
     config = function()
@@ -257,14 +247,7 @@ return {
     end,
   },
 
-  {"ellisonleao/carbon-now.nvim",
-    config = function()
-      require('carbon-now').setup {
-        open_cmd = 'open',
-        titlebar = '',
-      }
-    end,
-  },
+  {"ellisonleao/carbon-now.nvim", opts = { open_cmd = 'open', titlebar = '' } },
 
   {"salkin-mada/openscad.nvim",
     dependencies = "L3MON4D3/LuaSnip",
