@@ -52,6 +52,8 @@ vim.cmd([[command! W w]])
 vim.cmd([[command! Bd Bdelete]])
 vim.cmd([[cabbrev bd Bdelete]])
 
+vim.cmd([[cnoreabbrev q qa]])  -- Treat :q as :qa to exit nvim entirely instead of closing current window
+
 -- do not show quickfix in list of buffers
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
