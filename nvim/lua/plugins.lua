@@ -163,6 +163,12 @@ return {
       require('config.trouble')
     end,
   },
+  { "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('config.todo-comments')
+    end,
+  },
   { "folke/which-key.nvim",
     config = function()
       require('config.which-key')
