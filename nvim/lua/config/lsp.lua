@@ -26,17 +26,17 @@ local function next_diagnostic()
   vim.diagnostic.jump({count = 1, float = true})
 end
 
+local function toggle_inlay_hints()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
+
+vim.keymap.set('n', '<leader>vh', toggle_inlay_hints, { desc = 'Toggle inlay hints' })
+
 vim.keymap.set({'n', 'i'}, '<C-S-i>', vim.lsp.buf.signature_help, {desc = 'Signature help'})
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {desc = 'Code actions'})
-vim.keymap.set('n', '<leader>crr', rename_symbol, {desc = 'Rename symbol'})
-vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, {desc = 'Add directory to workspace'})
-vim.keymap.set('n', '<leader>wl', list_workspace_folders, {desc = 'List Workspace'})
-vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, {desc = 'Remove directory from workspace'})
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {desc = 'Goto Declaration'})
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'Goto Definition'})
-vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, {desc = 'Goto Definition'})
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {desc = 'Goto Implementation'})
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, {desc = 'Goto References'})
+vim.keymap.set('n', 'gri', vim.lsp.buf.incoming_calls, {desc = 'Goto incoming calls'})
+vim.keymap.set('n', 'gro', vim.lsp.buf.outgoing_calls, {desc = 'Goto outgoing calls'})
 
 vim.keymap.set('n', '[d', prev_diagnostic, {desc = 'Previous diagnostic'})
 vim.keymap.set('n', ']d', next_diagnostic, {desc = 'Next diagnostic'})
@@ -45,22 +45,18 @@ require('which-key').add({
   {'[d'},
   {']d'},
   {'<C-S-i>'},
-
-  {'<leader>c', group = 'Code'},
-  {'<leader>ca'},
-  {'<leader>crr'},
-
-  {'<leader>w', group = 'Workspace'},
-  {'<leader>wa'},
-  {'<leader>wl'},
-  {'<leader>wr'},
+  {'<leader>vh'},
 
   {'g', group = 'Goto'},
   {'gD'},
   {'gd'},
-  {'gt'},
-  {'gi'},
-  {'gr'},
+
+  {'gra', desc = 'Execute code action'},
+  {'grn', desc = 'Rename symbol'},
+  {'grx', desc = 'Run codelens'},
+  {'grr', desc = 'Goto references'},
+  {'grt', desc = 'Goto type definition'},
+  {'gri', desc = 'Goto implementation'},
 })
 
 local lua_runtime_paths = {}
