@@ -45,6 +45,8 @@ vim.opt.cinoptions = 'l1'
 
 vim.o.exrc = true
 
+local whichkey = require('which-key')
+
 -- aliases for commonly mistyped commands
 vim.cmd([[command! Q q]])
 vim.cmd([[command! W w]])
@@ -54,11 +56,23 @@ vim.cmd([[cabbrev bd Bdelete]])
 
 vim.cmd([[cnoreabbrev q qa]])  -- Treat :q as :qa to exit nvim entirely instead of closing current window
 
+vim.cmd([[packadd cfilter]])  -- Enable builtin plugin that allows filtering quifix results. See :Cfilter
+
+local function remove_current_quickfix_item()
+  local qf_list = vim.fn.getqflist()
+  local cur_line = vim.fn.line(".")
+  table.remove(qf_list, cur_line)
+  vim.fn.setqflist(qf_list, "r")
+  vim.api.nvim_win_set_cursor(0, { math.min(cur_line, #qf_list), 0 })
+end
+
 -- do not show quickfix in list of buffers
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
   callback = function()
     vim.opt_local.buflisted = false
+    vim.keymap.set('n', 'x', remove_current_quickfix_item, { buffer = true, silent = true, desc = 'Delete quickfix item' })
+    whichkey.add({ {'x'} })
   end,
 })
 
@@ -76,7 +90,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   end,
 })
 
-local whichkey = require('which-key')
 whichkey.add({
   {'<leader>b', group = 'Buffer'},
   {'<leader>bd', desc = 'Buffer delete'},
