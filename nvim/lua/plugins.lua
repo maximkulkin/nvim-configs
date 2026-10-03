@@ -137,12 +137,6 @@ return {
     end,
   },
 
-  { 'stevanmilic/nvim-lspimport',
-    config = function()
-      require('config.lspimport')
-    end,
-  },
-
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
