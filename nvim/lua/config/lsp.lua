@@ -111,7 +111,7 @@ vim.lsp.config('basedpyright', {
       autoSearchPaths = true,
       analysis = {
         autoImportCompletions = true,
-        diagnosticMode = 'openFilesOnly',
+        diagnosticMode = 'workspace',
         inlayHints = {
           variableTypes = true,
           callArgumentNames = true,
