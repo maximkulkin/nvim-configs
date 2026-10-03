@@ -50,9 +50,6 @@ gitsigns.setup({
       {'<leader>ghs'},
       {'<leader>ghr'},
 
-      {'<leader>ghs'},
-      {'<leader>ghr'},
-
       {'<leader>ghS'},
       {'<leader>ghR'},
 
