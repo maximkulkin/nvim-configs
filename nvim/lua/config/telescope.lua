@@ -15,6 +15,7 @@ telescope.setup({
         len = 3,
       },
     },
+    dynamic_preview_title = true,
     history = {},
     mappings = {
       i = {
@@ -116,9 +117,12 @@ vim.keymap.set('n', '<leader>fgc', builtin.git_commits, {desc = 'Git commits'})
 vim.keymap.set('n', '<leader>fgs', builtin.git_status, {desc = 'Git status'})
 vim.keymap.set('n', '<leader>fgt', builtin.git_stash, {desc = 'Git stash'})
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, {desc = 'Find word under cursor'})
+vim.keymap.set('n', '<leader>fy', builtin.lsp_dynamic_workspace_symbols, {desc = 'Workspace symbols'})
 vim.keymap.set('n', '<leader>fq', builtin.quickfix, {desc = 'Quickfix'})
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, {desc = 'Keymaps'})
 vim.keymap.set('n', '<leader>fl', builtin.loclist, {desc = 'Loclist'})
+vim.keymap.set('n', '<leader>ft', builtin.tagstack, {desc = 'Tagstack'})
+vim.keymap.set('n', '<leader>fj', builtin.jumplist, {desc = 'Jumplist'})
 vim.keymap.set('n', '<leader>fr', builtin.registers, {desc = 'Registers'})
 vim.keymap.set('n', '<leader>fm', builtin.marks, {desc = 'Marks'})
 vim.keymap.set('n', '<leader>fn', telescope_notifications, {desc = 'Notifications'})
