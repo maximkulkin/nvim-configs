@@ -246,6 +246,11 @@ return {
       require('config.neotest')
     end,
   },
+  {'andythigpen/nvim-coverage',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    version = '*',
+    opts = { auto_reload = true },
+  },
   {"akinsho/toggleterm.nvim",
     version = '*',
     config = function()
