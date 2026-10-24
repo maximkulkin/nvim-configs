@@ -238,12 +238,6 @@ return {
     version = '*',
     opts = { auto_reload = true },
   },
-  {"akinsho/toggleterm.nvim",
-    version = '*',
-    config = function()
-      require("config.toggleterm")
-    end,
-  },
 
   {"ellisonleao/carbon-now.nvim", opts = { open_cmd = 'open', titlebar = '' } },
 
