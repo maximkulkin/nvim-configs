@@ -70,12 +70,6 @@ return {
     opts = {},
   },
 
-  { 'hedyhli/outline.nvim',
-    config = function()
-      require('config.outline')
-    end,
-  },
-
   { 'nvim-lualine/lualine.nvim',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
