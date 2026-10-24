@@ -93,14 +93,6 @@ return {
     end,
   },
 
-  { 'akinsho/bufferline.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'famiu/bufdelete.nvim',
-    },
-    config = 'require("config.bufferline")',
-  },
-
   { 'j-hui/fidget.nvim',
     config = function()
       require('config.fidget')
