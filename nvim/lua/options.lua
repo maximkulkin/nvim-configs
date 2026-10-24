@@ -50,9 +50,6 @@ local whichkey = require('which-key')
 -- aliases for commonly mistyped commands
 vim.cmd([[command! Q q]])
 vim.cmd([[command! W w]])
--- replace standard "bdelete" with a Bdelete from bufdelete plugin
-vim.cmd([[command! Bd Bdelete]])
-vim.cmd([[cabbrev bd Bdelete]])
 
 vim.cmd([[cnoreabbrev q qa]])  -- Treat :q as :qa to exit nvim entirely instead of closing current window
 

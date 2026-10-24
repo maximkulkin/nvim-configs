@@ -80,6 +80,14 @@ return {
     end,
   },
 
+  { 'famiu/bufdelete.nvim',
+    config = function()
+      -- replace standard "bdelete" with a Bdelete from bufdelete plugin
+      vim.cmd([[command! Bd Bdelete]])
+      vim.cmd([[cabbrev bd Bdelete]])
+    end,
+  },
+
   { 'simeji/winresizer',
     init = function()
       vim.g.winresizer_start_key = '<C-w>r'
